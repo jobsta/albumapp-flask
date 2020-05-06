@@ -1,0 +1,118 @@
+# English (United Kingdom) translations for PROJECT.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-05-02 00:58+0200\n"
+"PO-Revision-Date: 2020-05-02 00:52+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en_GB\n"
+"Language-Team: en_GB <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: app/models/utils.py:269
+msgid "menu.albums"
+msgstr "Albums"
+
+#: app/models/utils.py:271
+msgid "menu.report"
+msgstr "Report"
+
+#: app/templates/layout.html:5 app/templates/layout.html:7
+msgid "menu.application title"
+msgstr "ReportBro Demo Application"
+
+#: app/templates/album/edit.html:9 app/templates/album/index.html:20
+msgid "album.name"
+msgstr "Album Name"
+
+#: app/templates/album/edit.html:13 app/templates/album/index.html:21
+msgid "album.artist"
+msgstr "Artist"
+
+#: app/templates/album/edit.html:17 app/templates/album/index.html:22
+msgid "album.year"
+msgstr "Year"
+
+#: app/templates/album/edit.html:21 app/templates/album/index.html:23
+msgid "album.best_of_compilation"
+msgstr "Best-of"
+
+#: app/templates/album/edit.html:25
+msgid "common.cancel"
+msgstr "cancel"
+
+#: app/templates/album/edit.html:26
+msgid "common.save"
+msgstr "save"
+
+#: app/templates/album/edit.html:67
+msgid "common.saving failed"
+msgstr "Saving failed"
+
+#: app/templates/album/index.html:7
+msgid "album.add"
+msgstr "add album"
+
+#: app/templates/album/index.html:11
+msgid "album.pdf report"
+msgstr "download"
+
+#: app/templates/album/index.html:45
+msgid "album.filter by year"
+msgstr "Filter by year"
+
+#: app/templates/album/index.html:74
+msgid "common.retrieving data failed"
+msgstr "Retrieving data failed"
+
+#: app/templates/error/http400.html:34 app/templates/error/http401.html:34
+#: app/templates/error/http403.html:34 app/templates/error/http404.html:34
+#: app/templates/error/http410.html:34 app/templates/error/http500.html:34
+msgid "error.title"
+msgstr "Error"
+
+#: app/templates/error/http400.html:35
+msgid "error.http_400"
+msgstr "Bad Request"
+
+#: app/templates/error/http401.html:35
+msgid "error.http_401"
+msgstr "Unauthorized"
+
+#: app/templates/error/http403.html:35
+msgid "error.http_403"
+msgstr "Forbidden"
+
+#: app/templates/error/http404.html:35
+msgid "error.http_404"
+msgstr "Not Found"
+
+#: app/templates/error/http410.html:35
+msgid "error.http_410"
+msgstr "Gone"
+
+#: app/templates/error/http500.html:35
+msgid "error.http_500"
+msgstr "Internal Server Error"
+
+#: app/views/album.py:104 app/views/album.py:108
+msgid "error.the field must not be empty"
+msgstr "The field must not be empty"
+
+#: app/views/album.py:115
+msgid "error.the field must contain a valid year"
+msgstr "The field must contain a valid year"
+
+#: app/views/album.py:117
+msgid "error.the field must contain a number"
+msgstr "The field must contain a number"
+

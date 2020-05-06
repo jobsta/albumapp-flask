@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ _('menu.application title') }}</title>
+
+    <meta name="application-name" content="{{ _('menu.application title') }}"/>
+
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <link href="{{ url_for('static', filename='reportbro/ext/spectrum.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url_for('static', filename='reportbro/reportbro.css') }}" rel="stylesheet" type="text/css"/>
+
+    <script src="{{ url_for('static', filename='reportbro/ext/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='reportbro/ext/autosize.js') }}"></script>
+    <script src="{{ url_for('static', filename='reportbro/ext/JsBarcode.all.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='reportbro/ext/spectrum.js') }}"></script>
+    <script src="{{ url_for('static', filename='reportbro/reportbro.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/knockout-3.5.1.min.js') }}"></script>
+
+    <link href="{{ url_for('static', filename='css/styles.css',  version='1.0.0') }}"
+          rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript">
+
+</script>
+
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <nav>
+                {% for menu_item in menu_items %}
+                    <a href="{{ menu_item['url'] }}" id="{{ menu_item['id'] }}" class="{{ menu_item['class'] }}">
+                        {{ menu_item['label'] }}
+                    </a>
+                {% endfor %}
+            </nav>
+        </header>
+
+        <!-- Content Wrapper -->
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+        <!-- /Content Wrapper -->
+    </div>
+<!-- container -->
+</body>
+</html>

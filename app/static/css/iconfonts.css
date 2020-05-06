@@ -1,0 +1,243 @@
+@font-face {
+  font-family: 'portal';
+  src:  url('../fonts/iconFonts/portal.eot?zapguq');
+  src:  url('../fonts/iconFonts/portal.eot?zapguq#iefix') format('embedded-opentype'),
+    url('../fonts/iconFonts/portal.woff2?zapguq') format('woff2'),
+    url('../fonts/iconFonts/portal.ttf?zapguq') format('truetype'),
+    url('../fonts/iconFonts/portal.woff?zapguq') format('woff'),
+    url('../fonts/iconFonts/portal.svg?zapguq#portal') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'portal' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-norwegianbuhund-standing-right:before {
+  content: "\e941";
+}
+.icon-norwegianbuhund-standing-left:before {
+  content: "\e942";
+}
+.icon-americanwaterspaniel-standing-right:before {
+  content: "\e911";
+}
+.icon-americanwaterspaniel-standing-left:before {
+  content: "\e912";
+}
+.icon-azawakh-standing-right:before {
+  content: "\e803";
+}
+.icon-azawakh-standing-left:before {
+  content: "\e804";
+}
+.icon-borzoi-standing-right:before {
+  content: "\e91d";
+}
+.icon-borzoi-standing-left:before {
+  content: "\e921";
+}
+.icon-bostonterrier-standing-right:before {
+  content: "\e92f";
+}
+.icon-bostonterrier-standing-left:before {
+  content: "\e930";
+}
+.icon-boxer-standing-right:before {
+  content: "\e93d";
+}
+.icon-boxer-standing-left:before {
+  content: "\e93e";
+}
+.icon-chartpolski-standing-right:before {
+  content: "\e935";
+}
+.icon-chartpolski-standing-left:before {
+  content: "\e936";
+}
+.icon-ceskyterrier-standing-right:before {
+  content: "\e917";
+}
+.icon-ceskyterrier-standing-left:before {
+  content: "\e918";
+}
+.icon-chihuahua-standing-right:before {
+  content: "\e927";
+}
+.icon-chihuahua-standing-left:before {
+  content: "\e928";
+}
+.icon-cirneco-standing-right:before {
+  content: "\e925";
+}
+.icon-cirneco-standing-left:before {
+  content: "\e926";
+}
+.icon-curlycoatedretriever-standing-right:before {
+  content: "\e929";
+}
+.icon-curlycoatedretriever-standing-left:before {
+  content: "\e92a";
+}
+.icon-deerhound-standing-right:before {
+  content: "\e90f";
+}
+.icon-deerhound-standing-left:before {
+  content: "\e910";
+}
+.icon-finnishlapphund-standing-right:before {
+  content: "\e907";
+}
+.icon-finnishlapphund-standing-left:before {
+  content: "\e908";
+}
+.icon-galgoespanol-standing-right:before {
+  content: "\e90d";
+}
+.icon-galgoespanol-standing-left:before {
+  content: "\e90e";
+}
+.icon-greyhound-standing-right:before {
+  content: "\e91b";
+}
+.icon-greyhound-standing-left:before {
+  content: "\e91c";
+}
+.icon-havanese-standing-right:before {
+  content: "\e90c";
+}
+.icon-havanese-standing-left:before {
+  content: "\e91e";
+}
+.icon-italiangreyhound-standing-right:before {
+  content: "\e903";
+}
+.icon-italiangreyhound-standing-left:before {
+  content: "\e904";
+}
+.icon-kromfohrlaender-standing-right:before {
+  content: "\e92b";
+}
+.icon-kromfohrlaender-standing-left:before {
+  content: "\e92c";
+}
+.icon-labradorretriever-standing-right:before {
+  content: "\e919";
+}
+.icon-labradorretriever-standing-left:before {
+  content: "\e91a";
+}
+.icon-magyaragar-standing-right:before {
+  content: "\e931";
+}
+.icon-magyaragar-standing-left:before {
+  content: "\e932";
+}
+.icon-papillon-standing-right:before {
+  content: "\e913";
+}
+.icon-papillon-standing-left:before {
+  content: "\e914";
+}
+.icon-pembrokewelshcorgi-standing-right:before {
+  content: "\e91f";
+}
+.icon-pembrokewelshcorgi-standing-left:before {
+  content: "\e920";
+}
+.icon-peruvianhairless-standing-right:before {
+  content: "\e93f";
+}
+.icon-peruvianhairless-standing-left:before {
+  content: "\e940";
+}
+.icon-pharaohhound-standing-right:before {
+  content: "\e93b";
+}
+.icon-pharaohhound-standing-left:before {
+  content: "\e93c";
+}
+.icon-podengoportugues-standing-right:before {
+  content: "\e915";
+}
+.icon-podengoportugues-standing-left:before {
+  content: "\e916";
+}
+.icon-pomeranian-standing-right:before {
+  content: "\e939";
+}
+.icon-pomeranian-standing-left:before {
+  content: "\e93a";
+}
+.icon-saluki-standing-right:before {
+  content: "\e905";
+}
+.icon-saluki-standing-left:before {
+  content: "\e906";
+}
+.icon-silkenwindsprite-standing-right:before {
+  content: "\e909";
+}
+.icon-silkenwindsprite-standing-left:before {
+  content: "\e90a";
+}
+.icon-sloughi-standing-right:before {
+  content: "\e922";
+}
+.icon-sloughi-standing-left:before {
+  content: "\e923";
+}
+.icon-swedishlapphund-standing-right:before {
+  content: "\e92d";
+}
+.icon-swedishlapphund-standing-left:before {
+  content: "\e92e";
+}
+.icon-tibetanmastiff-standing-right:before {
+  content: "\e937";
+}
+.icon-tibetanmastiff-standing-left:before {
+  content: "\e938";
+}
+.icon-welshspringerspaniel-standing-right:before {
+  content: "\e901";
+}
+.icon-welshspringerspaniel-standing-left:before {
+  content: "\e902";
+}
+.icon-whippet-standing-right:before {
+  content: "\e90b";
+}
+.icon-whippet-standing-left:before {
+  content: "\e924";
+}
+.icon-xolo-standing-right:before {
+  content: "\e933";
+}
+.icon-xolo-standing-left:before {
+  content: "\e934";
+}
+.icon-arrow-line-down:before {
+  content: "\e805";
+}
+.icon-cancel:before {
+  content: "\e604";
+}
+.icon-user:before {
+  content: "\e600";
+}
+.icon-facebook:before {
+  content: "\e900";
+}
