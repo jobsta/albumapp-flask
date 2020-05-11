@@ -17,9 +17,9 @@ setup(
     version=version,
     url="https://reportbro.com",
     project_urls={
-        "Documentation": "https://github.com/jobsta/reportbro/demoapps/album-flask",
-        "Code": "https://github.com/jobsta/reportbro/demoapps/album-flask",
-        "Issue tracker": "https://github.com/jobsta/reportbro/demoapps/album-flask/issues",
+        "Documentation": "https://github.com/jobsta/albumapp-flask",
+        "Code": "https://github.com/jobsta/albumapp-flask",
+        "Issue tracker": "https://github.com/jobsta/albumapp-flask/issues",
     },
     license="MIT",
     maintainer="jobsta",
