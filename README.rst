@@ -8,32 +8,37 @@ The application is a simple web app and allows to manage a list of music albums.
 ReportBro Designer is included so you can modify a template which is used
 when you print a pdf of all your albums.
 
+The Demo App is also avaiable for the `Django <https://www.djangoproject.com/>`_
+and `web2py <http://web2py.com/>`_ web frameworks. See
+`Album App for Django <https://github.com/jobsta/albumapp-django.git>`_ and
+`Album App for web2py <https://github.com/jobsta/albumapp-web2py.git>`_ respectively.
+
 All Instructions in this file are for a Linux/Mac shell but the commands should
 be easy to adapt for Windows.
 
 Installation
 ------------
 
-Clone git repository and change into repository dir:
+Clone the git repository and change into the created directory:
 
 .. code:: shell
 
     $ git clone https://github.com/jobsta/albumapp-flask.git
     $ cd albumapp-flask
 
-Create virtual environment:
+Create a virtual environment called env:
 
 .. code:: shell
 
     $ python3 -m venv env
 
-Activate virtual environment:
+Activate the virtual environment:
 
 .. code:: shell
 
     $ . env/bin/activate
 
-Install dependencies:
+Install all required dependencies:
 
 .. code:: shell
 
@@ -42,7 +47,7 @@ Install dependencies:
 Configuration
 -------------
 
-- Create *.flaskenv* file to setup app, port (8000) and flask environment (development) by using *flaskenv_example* file:
+- Create a *.flaskenv* file to setup app, port (8000) and the flask environment (set to development in the example) by using the file *flaskenv_example*:
 
 .. code:: shell
 
@@ -54,25 +59,25 @@ Configuration
 
     $ mkdir instance && mkdir instance/log
 
-- Copy *config.py* into *instance/config.py*
+- Copy the example configuration *config.py* into *instance/config.py*
 
 .. code:: shell
 
     $ cp config.py instance
 
-- Activate virtual environment (if not already active):
+- Activate the virtual environment (if not already active):
 
 .. code:: shell
 
     $ . env/bin/activate
 
-- Create database (creates albumapp.sqlite db in instance directory):
+- Create a database (creates albumapp.sqlite in the instance directory):
 
 .. code:: shell
 
     $ flask db create
 
-- Compile translation files so labels can be used in the application (generates messages.mo next to messages.po):
+- Compile all translation files so the labels can be used in the application (generates messages.mo next to messages.po):
 
 .. code:: shell
 
@@ -81,13 +86,13 @@ Configuration
 Run App
 -------
 
-Activate virtual environment (if not already active):
+Activate the virtual environment (if not already active):
 
 .. code:: shell
 
     $ . env/bin/activate
 
-Start Flask webserver:
+Start the Flask webserver:
 
 .. code:: shell
 
@@ -99,7 +104,7 @@ http://127.0.0.1:8000
 IDE Configuration (PyCharm)
 ---------------------------
 
-1. Open albumapp-flask repo directory
+1. Open the cloned albumapp-flask directory
 
 2. Add virtual env to project:
 
@@ -107,12 +112,12 @@ IDE Configuration (PyCharm)
 - Project: albumapp-flask -> Project interpreter
 - click Settings-Icon and select "Add Local" option, select the recently created virtual env
 
-3. Create new configuration: Edit Configurations...
+3. Create a new configuration: Edit Configurations...
 
 4. Setup configuration:
 
 - click + button and select Python
-- Set name to something useful, e.g. *Debug*
+- Set the name to something useful, e.g. *Debug*
 - Python interpreter: select virtual env (if not already set)
 - Script: select flask from virtual env (*env/bin/flask*)
 - Script parameters: run
@@ -121,18 +126,18 @@ IDE Configuration (PyCharm)
 Database
 --------
 
-An sqlite database is used to store application data (albums), report templates
-and report previews used by ReportBro Designer.
+sqlite is used as database to store the application data (albums),
+report templates and report previews used by ReportBro Designer.
 
-To initially create the db with its tables:
+To initially create the db with its tables the following steps are necessary:
 
-Activate virtual environment:
+Activate the virtual environment:
 
 .. code:: shell
 
     $ . env/bin/activate
 
-Create database tables:
+Create database (creates albumapp.sqlite db in the instance directory):
 
 .. code:: shell
 
@@ -142,25 +147,25 @@ Create database tables:
 Translations
 ------------
 
-Activate virtual environment:
+Activate the virtual environment:
 
 .. code:: shell
 
     $ . env/bin/activate
 
-Extract all texts to the .pot (portable object template) file and create translation file for given language locale:
+Extract all texts to the .pot (portable object template) file and create translation file for a given language locale:
 
 .. code:: shell
 
     $ flask translate init
 
-Update translation files:
+Update the translation files:
 
 .. code:: shell
 
     $ flask translate update
 
-Compile translation files so labels can be used in the application (generates messages.mo next to messages.po):
+Compile the translation files that the labels can be used in the application (generates messages.mo next to messages.po):
 
 .. code:: shell
 
