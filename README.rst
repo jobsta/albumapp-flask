@@ -13,8 +13,12 @@ and `web2py <http://web2py.com/>`_ web frameworks. See
 `Album App for Django <https://github.com/jobsta/albumapp-django.git>`_ and
 `Album App for web2py <https://github.com/jobsta/albumapp-web2py.git>`_ respectively.
 
-All Instructions in this file are for a Linux/Mac shell but the commands should
-be easy to adapt for Windows.
+All Instructions in this file are for a Linux/Mac shell but the commands are
+easy to adapt for Windows. If a command is different for Windows then
+it will be shown below. Commands which can be done in
+Windows Explorer (e.g. copy file, create directory) are not explicitly listed
+for Windows.
+
 
 Installation
 ------------
@@ -38,6 +42,14 @@ Activate the virtual environment:
 
     $ . env/bin/activate
 
+On Windows the virtual environment is activated this way instead:
+
+.. code:: shell
+
+    $ env\Scripts\activate
+
+Once the virtual environment is activated you should see the environment name prepended to the shell prompt.
+
 Install all required dependencies:
 
 .. code:: shell
@@ -47,7 +59,8 @@ Install all required dependencies:
 Configuration
 -------------
 
-- Create a *.flaskenv* file to setup app, port (8000) and the flask environment (set to development in the example) by using the file *flaskenv_example*:
+- Create a *.flaskenv* file to setup app, port (8000) and the flask environment (set to development in the example)
+by copying the file *flaskenv_example*:
 
 .. code:: shell
 
@@ -77,7 +90,8 @@ Configuration
 
     $ flask db create
 
-- Compile all translation files so the labels can be used in the application (generates messages.mo next to messages.po):
+- Compile all translation files so the labels can be used in the application
+(generates messages.mo next to messages.po):
 
 .. code:: shell
 
@@ -165,7 +179,8 @@ Update the translation files:
 
     $ flask translate update
 
-Compile the translation files that the labels can be used in the application (generates messages.mo next to messages.po):
+Compile the translation files that the labels can be used in the application
+(generates messages.mo next to messages.po):
 
 .. code:: shell
 
