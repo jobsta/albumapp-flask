@@ -59,7 +59,7 @@ Install all required dependencies:
 Configuration
 -------------
 
-- Create a *.flaskenv* file to setup app, port (8000) and the flask environment (set to development in the example)
+- Create a *.flaskenv* file to setup app, port (5000) and the flask environment (set to development in the example)
 by copying the file *flaskenv_example*:
 
 .. code:: shell
@@ -113,7 +113,7 @@ Start the Flask webserver:
     $ flask run
 
 Now your application is running and can be accessed here:
-http://127.0.0.1:8000
+http://127.0.0.1:5000
 
 IDE Configuration (PyCharm)
 ---------------------------
