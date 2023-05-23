@@ -7,7 +7,7 @@ metadata = MetaData()
 
 # store report requests for testing, used by ReportBro Designer
 # for preview of pdf and xlsx
-report_request = Table(
+t_report_request = Table(
     'report_request', metadata,
     Column('id', Integer, primary_key=True),
     Column('key', String(36), nullable=False),
@@ -21,7 +21,7 @@ report_request = Table(
 # report definition for our album report which is used for printing
 # the pdf with the album list. When the report is saved
 # in ReportBro Designer it will be stored in this table.
-report_definition = Table(
+t_report_definition = Table(
     'report_definition', metadata,
     Column('id', Integer, primary_key=True),
     Column('report_definition', JSON, nullable=False),
@@ -30,7 +30,7 @@ report_definition = Table(
     Column('last_modified_at', DateTime, nullable=False))
 
 # application data which can be added and edited in a form
-album = Table(
+t_album = Table(
     'album', metadata,
     Column('id', Integer, primary_key=True),
     Column('name', String(100), nullable=False),
@@ -51,12 +51,7 @@ def get_db():
 
 
 def close_db(e=None):
-    """If this request connected to the database, close the
-    connection.
-    """
-    db = g.pop('db', None)
-    # if db is not None:
-    #     db.close()
+    g.pop('db', None)
 
 
 def init_db():

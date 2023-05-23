@@ -3,11 +3,11 @@
 {% block content %}
 <div class="sideMenu">
     <a href="{{ url_for('album.edit') }}">
-        <span>{{ _('album.add') }}</span>
+        <span>{{ gettext('album.add') }}</span>
         <span class="icon-plus"></span>
     </a>
     <a data-bind="attr: { href: '{{ url_for('album.report') }}?year=' + year() }" target="_blank">
-        <span>{{ _('album.pdf report') }}</span>
+        <span>{{ gettext('album.pdf report') }}</span>
         <span class="icon-download"></span>
     </a>
 </div>
@@ -17,10 +17,10 @@
         <table>
             <thead>
                 <tr>
-                    <th>{{ _('album.name') }}</th>
-                    <th>{{ _('album.artist') }}</th>
-                    <th style="width: 60px;">{{ _('album.year') }}</th>
-                    <th style="width: 60px;">{{ _('album.best_of_compilation') }}</th>
+                    <th>{{ gettext('album.name') }}</th>
+                    <th>{{ gettext('album.artist') }}</th>
+                    <th style="width: 60px;">{{ gettext('album.year') }}</th>
+                    <th style="width: 60px;">{{ gettext('album.best_of_compilation') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,7 +44,7 @@
         </table>
     </div>
     <div class="filterContainer">
-        <input data-bind="textInput: year" id="album_year" placeholder="{{ _('album.filter by year') }}"
+        <input data-bind="textInput: year" id="album_year" placeholder="{{ gettext('album.filter by year') }}"
                type="number" maxlength="4">
     </div>
 </div>
@@ -52,38 +52,30 @@
 <script type="text/javascript">
 
 function AlbumsViewModel() {
-    var self = this;
+    const self = this;
     self.albums = ko.observableArray({{ albums|safe }});
     self.year = ko.observable('');
     self.year.subscribe(function(newVal) {
         self.filterChanged();
     });
-    self.request = null;
 
     self.filterChanged = function() {
-        if (self.request !== null) {
-            self.request.abort();
-        }
-        self.request = $.ajax("{{ url_for('album.data') }}?year=" + self.year(), {
-            contentType: "application/json",
-            dataType: "json",
-            success: function(albums) {
-                self.albums(albums);
-                self.request = null;
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                if (textStatus !== 'abort') {
-                    alert('{{ _('common.retrieving data failed') }}');
+        axios.get('{{ url_for('album.data') }}?year='  + self.year()
+            ).then(function (response) {
+                const data = response.data
+                self.albums(data);
+            })
+            .catch(function (error) {
+                if (!error.response || error.response.status !== 0) {
+                    alert('{{ gettext('common.retrieving data failed') }}');
                 }
-                self.request = null;
-            }
-        });
+            });
     };
 }
 
-var albumsViewModel = new AlbumsViewModel();
+const albumsViewModel = new AlbumsViewModel();
 
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function(event) {
     ko.applyBindings(albumsViewModel);
 });
 

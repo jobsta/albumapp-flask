@@ -49,12 +49,16 @@ def cleanup(e=None):
     db.close_db(e)
 
 
+def get_locale():
+    return 'en_GB'
+
+
 def create_app():
     # configure logger before logger is accessed
     configure_logger()
 
     app = Flask(__name__, instance_relative_config=True)
-    babel = Babel(app)
+    Babel(app, locale_selector=get_locale)
 
     # load config from instance/config.py
     app.config.from_pyfile('config.py')
@@ -84,10 +88,6 @@ def create_app():
     @app.route('/')
     def index():
         return redirect(url_for('home.index'))
-
-    @babel.localeselector
-    def get_locale():
-        return 'en_GB'
 
     return app
 

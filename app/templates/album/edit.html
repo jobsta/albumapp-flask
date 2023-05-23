@@ -6,24 +6,24 @@
         <div data-bind="with: album">
             <div>
                 <input data-bind="value: name" id="album_name"
-                       placeholder="{{ _('album.name') }}" type="text" maxlength="100">
+                       placeholder="{{ gettext('album.name') }}" type="text" maxlength="100">
             </div>
             <div>
                 <input data-bind="value: artist" id="album_artist"
-                       placeholder="{{ _('album.artist') }}"  type="text" maxlength="100">
+                       placeholder="{{ gettext('album.artist') }}"  type="text" maxlength="100">
             </div>
             <div>
                 <input data-bind="value: year" id="album_year" type="number"
-                       placeholder="{{ _('album.year') }}" maxlength="4">
+                       placeholder="{{ gettext('album.year') }}" maxlength="4">
             </div>
             <div>
                 <input data-bind="checked: best_of_compilation" id="album_best_of_compilation" type="checkbox">
-                <label for="album_best_of_compilation">{{ _('album.best_of_compilation') }}</label>
+                <label for="album_best_of_compilation">{{ gettext('album.best_of_compilation') }}</label>
             </div>
         </div>
         <div style="text-align: center">
-            <a href="{{ url_for('album.index') }}">{{ _('common.cancel') }}</a>
-            <button data-bind="click: save">{{ _('common.save') }}</button>
+            <a href="{{ url_for('album.index') }}">{{ gettext('common.cancel') }}</a>
+            <button data-bind="click: save">{{ gettext('common.save') }}</button>
         </div>
     </div>
 </div>
@@ -31,7 +31,7 @@
 <script type="text/javascript">
 
 function Album(data) {
-    var self = this;
+    const self = this;
     self.id = data.id;
     self.name = ko.observable(data.name);
     self.artist = ko.observable(data.artist);
@@ -40,39 +40,39 @@ function Album(data) {
 }
 
 function AlbumViewModel() {
-    var self = this;
+    const self = this;
 
     self.album = new Album({{ album|safe }});
 
     self.save = function() {
-        $('input').removeClass('error');  // remove possible errors from previous validation
+        // remove possible errors from previous validation
+        const elInputs = document.getElementsByTagName('input');
+        for (const elInput of elInputs) {
+            elInput.classList.remove('error');
+        }
 
-        $.ajax("{{ url_for('album.save') }}", {
-            data: ko.toJSON({
-                album: self.album
-            }),
-            type: "post", contentType: "application/json",
-            dataType: "json",
-            success: function(obj) {
-                if (obj.errors.length === 0) {
+        axios.post('{{ url_for('album.save') }}',
+            ko.toJS({ album: self.album }),
+            ).then(function (response) {
+                const data = response.data
+                if (data.errors.length === 0) {
                     window.location = '{{ url_for('album.index') }}';
                 } else {
                     // highlight input fields with validation error
-                    for (var i=0; i < obj.errors.length; i++) {
-                        $('#album_' + obj.errors[i].field).addClass('error');
+                    for (let i=0; i < data.errors.length; i++) {
+                      document.getElementById('album_' + data.errors[i].field).classList.add('error')
                     }
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert('{{ _('common.saving failed') }}');
-            }
-        });
+            })
+            .catch(function (error) {
+                alert('{{ gettext('common.saving failed') }}');
+            });
     };
 }
 
-var albumViewModel = new AlbumViewModel();
+const albumViewModel = new AlbumViewModel();
 
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function(event) {
     ko.applyBindings(albumViewModel);
 });
 

@@ -1,11 +1,12 @@
 import datetime
 import json
-from app.models import db
-from app.models.utils import create_album_report_template, get_menu_items, json_default
-from flask import abort, Blueprint, redirect, render_template, Response, request, url_for
-from flask import current_app as app
-from flask_babel import _
+
+from flask import Blueprint, Response, abort, current_app as app, redirect, render_template, request, url_for
+from flask_babel import gettext
 from sqlalchemy import func, select
+
+from app.models.db import get_db, t_album, t_report_definition
+from app.models.utils import create_album_report_template, get_menu_items, json_default
 
 album_bp = Blueprint('album', __name__, url_prefix='/album')
 
@@ -31,16 +32,22 @@ def data():
 @album_bp.route('/edit/<int:album_id>')
 def edit(album_id=None):
     """Shows an edit form to add new or edit an existing album."""
-    db_engine = db.get_db()
+    db_engine = get_db()
     rv = dict()
     rv['menu_items'] = get_menu_items('album')
     if album_id:
-        album = db_engine.execute(
-            select([db.album]).where(db.album.c.id == album_id)).fetchone()
+        with db_engine.begin() as connection:
+            album = connection.execute(
+                select(t_album)
+                .where(t_album.c.id == album_id)
+            ).fetchone()
         if not album:
             redirect(url_for('album.index'))
         rv['is_new'] = False
-        rv['album'] = json.dumps(dict(album))
+        rv['album'] = json.dumps(dict(
+            id=album.id, name=album.name, artist=album.artist, year=album.year,
+            best_of_compilation=album.best_of_compilation,
+        ))
     else:
         rv['is_new'] = True
         rv['album'] = json.dumps(dict(id='', name='', year=None, best_of_compilation=False))
@@ -78,27 +85,30 @@ def report():
     else:
         year = None
 
-    db_engine = db.get_db()
+    db_engine = get_db()
 
     # NOTE: these params must match exactly with the parameters defined in the
     # report definition in ReportBro Designer, check the name and type (Number, Date, List, ...)
     # of those parameters in the Designer.
     params = dict(year=year, albums=get_albums(year), current_date=datetime.datetime.now())
 
-    report_count = db_engine.execute(
-        select([func.count(db.report_definition.c.id)]).\
-        where(db.report_definition.c.report_type == 'albums_report')).scalar()
-    if report_count == 0:
-        create_album_report_template()
+    with db_engine.begin() as connection:
+        report_count = connection.execute(
+            select(func.count(t_report_definition.c.id))
+            .where(t_report_definition.c.report_type == 'albums_report')
+        ).scalar()
+        if report_count == 0:
+            create_album_report_template()
 
-    report_definition = db_engine.execute(
-        select([db.report_definition.c.id, db.report_definition.c.report_definition]).\
-        where(db.report_definition.c.report_type == 'albums_report')).fetchone()
-    if not report_definition:
-        raise abort(500, 'no report_definition available')
+        report_definition = connection.execute(
+            select(t_report_definition.c.id, t_report_definition.c.report_definition)
+            .where(t_report_definition.c.report_type == 'albums_report')
+        ).fetchone()
+        if not report_definition:
+            raise abort(500, 'no report_definition available')
 
     try:
-        report_inst = Report(report_definition['report_definition'], params)
+        report_inst = Report(report_definition.report_definition, params)
         if report_inst.errors:
             # report definition should never contain any errors,
             # unless you saved an invalid report and didn't test in ReportBro Designer
@@ -108,7 +118,7 @@ def report():
         response = Response()
         response.headers['Content-Type'] = 'application/pdf'
         response.headers['Content-Disposition'] = 'inline; filename="albums.pdf"'
-        response.set_data(pdf_report)
+        response.set_data(bytes(pdf_report))
         return response
     except ReportBroError as ex:
         app.logger.error(ex.error)
@@ -120,8 +130,8 @@ def report():
 @album_bp.route('/save',  methods=['POST'])
 def save():
     """Saves a music album in the db."""
-    db_engine = db.get_db()
-    json_data = request.json
+    db_engine = get_db()
+    json_data = request.get_json(silent=True)
     if json_data is None:
         abort(400, 'invalid request values')
     album = json_data.get('album')
@@ -139,39 +149,52 @@ def save():
 
     # perform some basic form validation
     if not album.get('name'):
-        rv['errors'].append(dict(field='name', msg=str(_('error.the field must not be empty'))))
+        rv['errors'].append(dict(field='name', msg=str(gettext('error.the field must not be empty'))))
     else:
         values['name'] = album.get('name')
     if not album.get('artist'):
-        rv['errors'].append(dict(field='artist', msg=str(_('error.the field must not be empty'))))
+        rv['errors'].append(dict(field='artist', msg=str(gettext('error.the field must not be empty'))))
     else:
         values['artist'] = album.get('artist')
     if album.get('year'):
         try:
             values['year'] = int(album.get('year'))
             if values['year'] < 1900 or values['year'] > 2100:
-                rv['errors'].append(dict(field='year', msg=str(_('error.the field must contain a valid year'))))
+                rv['errors'].append(dict(field='year', msg=str(gettext('error.the field must contain a valid year'))))
         except (ValueError, TypeError):
-            rv['errors'].append(dict(field='year', msg=str(_('error.the field must contain a number'))))
+            rv['errors'].append(dict(field='year', msg=str(gettext('error.the field must contain a number'))))
     else:
         values['year'] = None
 
     if not rv['errors']:
         # no validation errors -> save album
-        if album_id:
-            db_engine.execute(
-                db.album.update().where(db.album.c.id == album_id).values(**values))
-        else:
-            db_engine.execute(db.album.insert(), **values)
+        with db_engine.begin() as connection:
+            if album_id:
+                connection.execute(
+                    t_album.update()
+                    .where(t_album.c.id == album_id)
+                    .values(**values)
+                )
+            else:
+                connection.execute(
+                    t_album.insert()
+                    .values(**values)
+                )
     return json.dumps(rv)
 
 
 def get_albums(year=None):
     """Returns available albums from the database. Can be optionally filtered by year."""
-    db_engine = db.get_db()
-    select_albums = select([db.album])
+    db_engine = get_db()
+    select_albums = select(t_album)
     if year is not None:
-        select_albums = select_albums.where(db.album.c.year == year)
-    items = db_engine.execute(select_albums).fetchall()
-    # convert list of RowProxy's to list of dict items
-    return [dict(item) for item in items]
+        select_albums = select_albums.where(t_album.c.year == year)
+    items = []
+    with db_engine.begin() as connection:
+        rows = connection.execute(select_albums).fetchall()
+        for row in rows:
+            items.append(dict(
+                id=row.id, name=row.name, artist=row.artist, year=row.year,
+                best_of_compilation=row.best_of_compilation,
+            ))
+    return items

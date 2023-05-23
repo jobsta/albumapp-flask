@@ -5,35 +5,30 @@
 
 <script type="text/javascript">
 
-var rb = null;
-
 function saveReport() {
-    var report = rb.getReport();
+    const report = rb.getReport();
 
     // console.log(JSON.stringify(report));
-    $.ajax("{{ url_for('report.save', report_type='albums_report') }}", {
-        data: JSON.stringify(report),
-        type: "PUT", contentType: "application/json",
-        success: function(data) {
+    axios.put('{{ url_for('report.save', report_type='albums_report') }}', {
+        report: report
+      }).then(function (response) {
             // report definition saved successfully,
             // set modified flag to false to disable save button
             rb.setModified(false);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
+        })
+        .catch(function (error) {
             alert('saving report failed');
-        }
-    });
+        })
 }
 
-$(document).ready(function() {
-    rb = $('#reportbro').reportBro({
-        reportServerUrl: "{{ url_for('report.run') }}",
-        saveCallback: saveReport
-    });
-    var report = {{ report_definition|safe }};
-    if (report) {
-        rb.load(report);
-    }
+const report = {{ report_definition|safe }};
+const rb = new ReportBro(document.getElementById('reportbro'), {
+    reportServerUrl: "{{ url_for('report.run') }}",
+    saveCallback: saveReport,
 });
+if (report) {
+    rb.load(report);
+}
+
 </script>
 {% endblock %}
