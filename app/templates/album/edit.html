@@ -21,7 +21,7 @@
                 <label for="album_best_of_compilation">{{ gettext('album.best_of_compilation') }}</label>
             </div>
         </div>
-        <div style="text-align: center">
+        <div class="buttonPane">
             <a href="{{ url_for('album.index') }}">{{ gettext('common.cancel') }}</a>
             <button data-bind="click: save">{{ gettext('common.save') }}</button>
         </div>
