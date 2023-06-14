@@ -1,5 +1,3 @@
-__version__ = "1.0.0"
-
 from flask import Flask, redirect, url_for
 from flask_babel import Babel
 from .commands import db_cli, translate_cli

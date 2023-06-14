@@ -30,31 +30,19 @@ Clone the git repository and change into the created directory:
     $ git clone https://github.com/jobsta/albumapp-flask.git
     $ cd albumapp-flask
 
-Create a virtual environment called env:
+This app requires poetry (version 1.2.2 or newer) to be installed and working. See https://python-poetry.org/docs/#installation
+for installation details.
+
+Install all dependencies:
+
+.. code:: shell
+    $ poetry install
+
+To activate the virtual environment:
 
 .. code:: shell
 
-    $ python3 -m venv env
-
-Activate the virtual environment:
-
-.. code:: shell
-
-    $ . env/bin/activate
-
-On Windows the virtual environment is activated this way instead:
-
-.. code:: shell
-
-    $ env\Scripts\activate
-
-Once the virtual environment is activated you should see the environment name prepended to the shell prompt.
-
-Install all required dependencies:
-
-.. code:: shell
-
-    $ python setup.py install
+    $ poetry shell
 
 Configuration
 -------------
@@ -78,39 +66,27 @@ by copying the file *flaskenv_example*:
 
     $ cp config.py instance
 
-- Activate the virtual environment (if not already active):
-
-.. code:: shell
-
-    $ . env/bin/activate
-
 - Create a database (creates albumapp.sqlite in the instance directory):
 
 .. code:: shell
 
-    $ flask db create
+    $ poetry run flask db create
 
 - Compile all translation files so the labels can be used in the application
 (generates messages.mo next to messages.po):
 
 .. code:: shell
 
-    $ flask translate compile
+    $ poetry run flask translate compile
 
 Run App
 -------
-
-Activate the virtual environment (if not already active):
-
-.. code:: shell
-
-    $ . env/bin/activate
 
 Start the Flask webserver:
 
 .. code:: shell
 
-    $ flask run
+    $ poetry run flask run
 
 Now your application is running and can be accessed here:
 http://127.0.0.1:5000
@@ -124,7 +100,8 @@ IDE Configuration (PyCharm)
 
 - Select File -> Settings
 - Project: albumapp-flask -> Project interpreter
-- click Settings-Icon and select "Add Local" option, select the recently created virtual env
+- click Settings-Icon and select "Add Local" option
+- Choose "Poetry Environment" and select "Existing Environment"
 
 3. Create a new configuration: Edit Configurations...
 
@@ -145,46 +122,34 @@ report templates and report previews used by ReportBro Designer.
 
 To initially create the db with its tables the following steps are necessary:
 
-Activate the virtual environment:
-
-.. code:: shell
-
-    $ . env/bin/activate
-
 Create database (creates albumapp.sqlite db in the instance directory):
 
 .. code:: shell
 
-    $ flask db create
+    $ poetry run flask db create
 
 
 Translations
 ------------
 
-Activate the virtual environment:
-
-.. code:: shell
-
-    $ . env/bin/activate
-
 Extract all texts to the .pot (portable object template) file and create translation file for a given language locale:
 
 .. code:: shell
 
-    $ flask translate init
+    $ poetry run flask translate init
 
 Update the translation files:
 
 .. code:: shell
 
-    $ flask translate update
+    $ poetry run flask translate update
 
 Compile the translation files that the labels can be used in the application
 (generates messages.mo next to messages.po):
 
 .. code:: shell
 
-    $ flask translate compile
+    $ poetry run flask translate compile
 
 Python Coding Style
 -------------------
