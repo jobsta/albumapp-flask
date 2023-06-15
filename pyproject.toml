@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "albumapp-flask"
+version = "1.0.0"
+description = "ReportBro Album Demo-App for Flask"
+authors = ["Jobsta <contact@jobsta.at>"]
+license = "MIT"
+readme = "README.rst"
+
+homepage = "https://www.reportbro.com"
+repository = "https://github.com/jobsta/albumapp-flask"
+documentation = "https://github.com/jobsta/albumapp-flask"
+
+classifiers = [
+	"Development Status :: 5 - Production/Stable",
+	"Environment :: Web Environment",
+	"Framework :: Flask",
+	"Intended Audience :: Developers",
+	"License :: OSI Approved :: MIT License",
+	"Operating System :: OS Independent",
+	"Programming Language :: Python :: 3.8",
+	"Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+	"Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+]
+
+packages = [
+    { include = "app" },
+]
+
+include = ["app/translations/**/LC_MESSAGES/*.mo"]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/jobsta/albumapp-flask/issues"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Flask = "^2.3.2"
+Jinja2 = "^3.1.2"
+itsdangerous = "^2.1.2"
+click = "8.1.3"
+python-dotenv = "^1.0.0"
+Flask-Babel = "^3.1.0"
+reportbro-lib = "^3.2.0"
+SQLAlchemy = "^2"
+requests = "^2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
